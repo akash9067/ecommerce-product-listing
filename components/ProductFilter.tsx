@@ -18,6 +18,7 @@ const FilterComponent: React.FC<FilterProps> = ({
 }) => {
   console.log("TCL: selectedFilters", selectedFilters);
   const [activeFilters, setActiveFilters] = useState<string[]>(selectedFilters);
+  console.log("TCL: activeFilters", activeFilters);
   const [expandedCategories, setExpandedCategories] = useState<string[]>([]);
 
   const filters: Filter[] = [
@@ -85,20 +86,21 @@ const FilterComponent: React.FC<FilterProps> = ({
           </button>
         </div>
         <div className="flex flex-wrap gap-2 mt-2">
-          {activeFilters.map((filter, index) => (
-            <span
-              key={index}
-              className="bg-gray-200 text-sm py-1 px-2 rounded-full flex items-center"
-            >
-              {filter}
-              <button
-                onClick={() => handleFilterClick(filter)}
-                className="ml-2 text-gray-600 hover:text-gray-800"
+          {activeFilters &&
+            activeFilters?.map((filter, index) => (
+              <span
+                key={index}
+                className="bg-gray-200 text-sm py-1 px-2 rounded-full flex items-center"
               >
-                ✕
-              </button>
-            </span>
-          ))}
+                {filter}
+                <button
+                  onClick={() => handleFilterClick(filter)}
+                  className="ml-2 text-gray-600 hover:text-gray-800"
+                >
+                  ✕
+                </button>
+              </span>
+            ))}
         </div>
       </div>
 

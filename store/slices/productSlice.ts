@@ -1,13 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface Product {
-  sizeOptions: any;
-  viscosity: any;
-  brand: any;
+  sizeOptions: string;
+  viscosity: string;
+  brand: string;
   sku: string;
   sizesAvailable: boolean;
   dimensions: string;
-  category: any;
+  category: string[];
   images: string;
   title: string;
   id: number;

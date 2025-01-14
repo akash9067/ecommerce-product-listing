@@ -9,6 +9,21 @@ import FilterComponent from "./ProductFilter";
 import ProductCard from "./ProductCard";
 import axios from "axios";
 
+interface Product {
+  sizeOptions: string;
+  viscosity: string;
+  brand: string;
+  sku: string;
+  sizesAvailable: boolean;
+  dimensions: string;
+  category: string[];
+  images: string;
+  title: string;
+  id: number;
+  price: number;
+  image: string;
+}
+
 const ProductList = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -19,7 +34,7 @@ const ProductList = () => {
   );
 
   const [activeFilters, setActiveFilters] = useState<string[]>([]);
-  const [filteredProducts, setFilteredProducts] = useState<any[]>([]);
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
 
   // Load filters from query string on initial render
   useEffect(() => {
@@ -47,14 +62,13 @@ const ProductList = () => {
   // Filter products whenever items or activeFilters change
   useEffect(() => {
     const filtered = filterProducts(items, activeFilters);
-    console.log("TCL: ProductList -> filtered", filtered);
     setFilteredProducts(filtered);
   }, [items, activeFilters]);
 
   // Update query string when filters change
   const updateQueryString = (filters: string[]) => {
     const query = filters.length ? `?filters=${filters.join(",")}` : "";
-    router.push(query, { shallow: true });
+    router.push(query);
   };
 
   const handleFilterChange = (filters: string[]) => {
@@ -72,7 +86,7 @@ const ProductList = () => {
     dispatch(setCurrentPage(page));
   };
 
-  const filterProducts = (products: any[], filters: string[]) => {
+  const filterProducts = (products: Product[], filters: string[]) => {
     if (!filters.length) return products;
 
     const brandFilters = filters.filter((filter) =>
@@ -131,7 +145,7 @@ const ProductList = () => {
           />
         </div>
         <div className="w-full grid grid-cols-2 md:grid-cols-3">
-          {displayedProducts.map((product: any) => (
+          {displayedProducts.map((product: Product) => (
             <ProductCard
               key={product.id}
               id={product.id}
