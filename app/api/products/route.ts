@@ -28,5 +28,6 @@ export async function GET() {
     ][Math.floor(Math.random() * 6)],
     brand: ["Mobil", "Old World", "Peak"][Math.floor(Math.random() * 3)]
   }));
+	console.log("TCL: products", products)
   return NextResponse.json(products);
 }

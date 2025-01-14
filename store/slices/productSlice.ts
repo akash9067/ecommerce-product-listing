@@ -17,7 +17,7 @@ interface Product {
 
 interface ProductState {
   items: Product[];
-  filters: Record<string, any>;
+  filters: Record<string, unknown>;
   sort: string;
   currentPage: number;
   productsPerPage: number;
@@ -38,7 +38,7 @@ const productSlice = createSlice({
     setProducts(state, action: PayloadAction<Product[]>) {
       state.items = action.payload;
     },
-    setFilters(state, action: PayloadAction<Record<string, any>>) {
+    setFilters(state, action: PayloadAction<Record<string, unknown>>) {
       state.filters = action.payload;
     },
     setSort(state, action: PayloadAction<string>) {

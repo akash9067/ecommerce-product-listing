@@ -39,11 +39,10 @@ const Header = () => {
 
   return (
     <div>
-      {" "}
       <header className="bg-gray-800 text-white flex items-center justify-between relative py-2">
         <div
           className="hamburger block md:hidden ml-2 cursor-pointer"
-          onClick={toggleMenu}
+          onClick={() => toggleMenu()}
         >
           {isMenuOpen ? "Close" : "Menu"}
         </div>
@@ -62,55 +61,55 @@ const Header = () => {
 
         <nav className="hidden md:flex">
           <ul className="flex space-x-6">
-            {categories.map((category) => (
-              <li
-                key={category.name}
-                className={`relative group ${
-                  activeCategory === category.name ? "bg-gray-700 rounded" : ""
-                }`}
-                onClick={() => handleCategoryClick(category.name)}
-              >
-                <span className="cursor-pointer px-2 py-1">
-                  {category.name}
-                </span>{" "}
-                {/* Added padding */}
-                {category.subcategories && (
-                  <ul className="absolute left-0 top-full hidden  bg-gray-700 rounded w-max">
-                    {" "}
-                    {/* Added w-max */}
-                    {category.subcategories.map((subcategory) => (
-                      <li
-                        key={subcategory.name}
-                        className="p-2 hover:bg-gray-600 rounded whitespace-nowrap"
-                      >
+            {categories?.map((category) => {
+              return (
+                <li
+                  key={category.name}
+                  className={`relative group ${
+                    activeCategory === category.name
+                      ? "bg-gray-700 rounded"
+                      : ""
+                  }`}
+                  onClick={() => {
+                    if (category.subcategories)
+                      handleCategoryClick(category.name);
+                  }}
+                >
+                  <span className="cursor-pointer px-2 py-1">
+                    {category.name}
+                  </span>{" "}
+                  {category.subcategories &&
+                    category.subcategories.length > 0 && (
+                      <ul className="absolute left-0 top-full hidden  bg-gray-700 rounded w-max">
                         {" "}
-                        {/* Added whitespace-nowrap */}
-                        <Link
-                          href={subcategory.href}
-                          className="hover:text-gray-300 block"
-                        >
-                          {subcategory.name}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </li>
-            ))}
+                        {category.subcategories?.map((subcategory) => (
+                          <li
+                            key={subcategory.name}
+                            className="p-2 hover:bg-gray-600 rounded whitespace-nowrap"
+                          >
+                            {" "}
+                            <Link
+                              href={subcategory.href}
+                              className="hover:text-gray-300 block"
+                            >
+                              {subcategory.name}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                </li>
+              );
+            })}
           </ul>
         </nav>
 
-        {/* ... (Search, Login, and Cart - same as before) */}
         <div className="flex items-center space-x-4 mr-4">
-          {" "}
-          {/* Added space-x for spacing */}
           <div className="relative w-64">
-            {" "}
-            {/* Set a fixed width for the search bar */}
             <input
               type="text"
               placeholder="Search by keyword, brand or SKU..."
-              className="w-full pl-4 pr-10 py-2 border border-gray-300 rounded-md text-black focus:outline-none focus:ring-2 focus:ring-blue-500" // Added text-black
+              className="w-full pl-4 pr-10 py-2 border border-gray-300 rounded-md text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
               <svg
@@ -136,7 +135,7 @@ const Header = () => {
             <Image
               src="/path-to-cart-icon.svg"
               alt="Cart"
-              className="h-6 w-6" // Added w-6 for consistent size
+              className="h-6 w-6"
               width={24}
               height={24}
             />
@@ -180,13 +179,11 @@ const Header = () => {
           </div>
         )}
       </header>
-      {/* Subheader (Conditionally rendered) */}
+
       {activeCategory && (
         <div className="bg-gray-400 text-white p-4 w-full">
           <div className="container mx-auto">
             <ul className="flex space-x-6">
-              {" "}
-              {/* This is the key change: flex and space-x-6 */}
               {categories
                 .find((cat) => cat.name === activeCategory)
                 ?.subcategories?.map((subcategory) => (
@@ -194,8 +191,6 @@ const Header = () => {
                     key={subcategory.name}
                     className="whitespace-nowrap flex flex-col"
                   >
-                    {" "}
-                    {/* Added whitespace-nowrap here as well */}
                     <Link
                       href={subcategory.href}
                       className="hover:text-gray-300"

@@ -86,25 +86,24 @@ const FilterComponent: React.FC<FilterProps> = ({
           </button>
         </div>
         <div className="flex flex-wrap gap-2 mt-2">
-          {activeFilters &&
-            activeFilters?.map((filter, index) => (
-              <span
-                key={index}
-                className="bg-gray-200 text-sm py-1 px-2 rounded-full flex items-center"
+          {activeFilters?.map((filter, index) => (
+            <span
+              key={index}
+              className="bg-gray-200 text-sm py-1 px-2 rounded-full flex items-center"
+            >
+              {filter}
+              <button
+                onClick={() => handleFilterClick(filter)}
+                className="ml-2 text-gray-600 hover:text-gray-800"
               >
-                {filter}
-                <button
-                  onClick={() => handleFilterClick(filter)}
-                  className="ml-2 text-gray-600 hover:text-gray-800"
-                >
-                  ✕
-                </button>
-              </span>
-            ))}
+                ✕
+              </button>
+            </span>
+          ))}
         </div>
       </div>
 
-      {filters.map((filter) => (
+      {filters?.map((filter) => (
         <div key={filter.category} className="mb-4">
           <div
             className="flex justify-between items-center cursor-pointer"
@@ -115,23 +114,24 @@ const FilterComponent: React.FC<FilterProps> = ({
               {expandedCategories.includes(filter.category) ? "−" : "+"}
             </span>
           </div>
-          {expandedCategories.includes(filter.category) && (
-            <ul className="mt-2 pl-2">
-              {filter.items.map((item) => (
-                <li key={item} className="mb-1">
-                  <label className="flex items-center text-sm">
-                    <input
-                      type="checkbox"
-                      className="mr-2"
-                      checked={activeFilters.includes(item)}
-                      onChange={() => handleFilterClick(item)}
-                    />
-                    {item}
-                  </label>
-                </li>
-              ))}
-            </ul>
-          )}
+          {expandedCategories &&
+            expandedCategories.includes(filter.category) && (
+              <ul className="mt-2 pl-2">
+                {filter.items?.map((item) => (
+                  <li key={item} className="mb-1">
+                    <label className="flex items-center text-sm">
+                      <input
+                        type="checkbox"
+                        className="mr-2"
+                        checked={activeFilters.includes(item)}
+                        onChange={() => handleFilterClick(item)}
+                      />
+                      {item}
+                    </label>
+                  </li>
+                ))}
+              </ul>
+            )}
         </div>
       ))}
     </div>

@@ -36,7 +36,6 @@ const ProductList = () => {
   const [activeFilters, setActiveFilters] = useState<string[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
 
-  // Load filters from query string on initial render
   useEffect(() => {
     const filtersFromQuery = searchParams.get("filters");
     if (filtersFromQuery) {
@@ -44,7 +43,6 @@ const ProductList = () => {
     }
   }, [searchParams]);
 
-  // Fetch products from API
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -59,16 +57,21 @@ const ProductList = () => {
     fetchProducts();
   }, [dispatch]);
 
-  // Filter products whenever items or activeFilters change
   useEffect(() => {
-    const filtered = filterProducts(items, activeFilters);
-    setFilteredProducts(filtered);
+    if (items.length) {
+      const filtered = filterProducts(items, activeFilters);
+      setFilteredProducts(filtered);
+    }
   }, [items, activeFilters]);
 
-  // Update query string when filters change
   const updateQueryString = (filters: string[]) => {
-    const query = filters.length ? `?filters=${filters.join(",")}` : "";
-    router.push(query);
+    const filteredFilters = filters.filter((filter) => filter !== "");
+    const query = filteredFilters.length
+      ? `?filters=${filteredFilters.join(",")}`
+      : undefined;
+    if (query) {
+      router.push(query);
+    }
   };
 
   const handleFilterChange = (filters: string[]) => {
@@ -107,30 +110,25 @@ const ProductList = () => {
     );
 
     return products.filter((product) => {
-      // Enforce brand filter if it exists
       if (brandFilters.length && !brandFilters.includes(product.brand)) {
-        return false; // Exclude product if it doesn't match the brand filter
+        return false;
       }
 
-      // Check viscosity filter
       if (
         viscosityFilters.length &&
         !viscosityFilters.some((viscosity) =>
           product.viscosity?.includes(viscosity)
         )
       ) {
-        return false; // Exclude product if it doesn't match viscosity filter
+        return false;
       }
 
-      // Check size filter
       if (
         sizeFilters.length &&
         !sizeFilters.some((size) => product.sizeOptions?.includes(size))
       ) {
-        return false; // Exclude product if it doesn't match size filter
+        return false;
       }
-
-      // If it passes all active filters, include the product
       return true;
     });
   };
@@ -145,7 +143,7 @@ const ProductList = () => {
           />
         </div>
         <div className="w-full grid grid-cols-2 md:grid-cols-3">
-          {displayedProducts.map((product: Product) => (
+          {displayedProducts?.map((product: Product) => (
             <ProductCard
               key={product.id}
               id={product.id}
