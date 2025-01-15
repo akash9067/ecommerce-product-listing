@@ -6,8 +6,7 @@ export async function GET() {
     title: `Product ${index + 1}`,
     sku: `SKU-${index + 1000}`,
     price: (10 + Math.random() * 50).toFixed(2),
-    image: `/images/product.svg`,
-    dimensions: `${Math.floor(Math.random() * 1000)} x ${Math.floor(Math.random() * 500)}`,
+    image: `product.svg`,
     sizesAvailable: Math.random() > 0.5,
     category: ["Lube-Tech", "Chemicals", "Supplies", "Equipment", "Auto Parts"][Math.floor(Math.random() * 5)],
     sizeOptions: [

@@ -6,12 +6,10 @@ interface Product {
   brand: string;
   sku: string;
   sizesAvailable: boolean;
-  dimensions: string;
-  category: string[];
-  images: string;
+  category: string;
   title: string;
   id: number;
-  price: number;
+  price: string;
   image: string;
 }
 

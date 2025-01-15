@@ -5,11 +5,10 @@ interface ProductProps {
   id: number;
   title: string;
   sku: string;
-  price: number;
+  price: string;
   image: string;
-  dimensions: string;
   sizesAvailable: boolean;
-  category: string[];
+  category: string;
   sizeOptions: string;
   viscosity: string;
   brand: string;
