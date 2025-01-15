@@ -6,7 +6,7 @@ import { useState } from "react";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeCategory, setActiveCategory] = useState(""); // Track active category
+  const [activeCategory, setActiveCategory] = useState("");
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -20,21 +20,21 @@ const Header = () => {
     {
       name: "Browse Categories",
       subcategories: [
-        { name: "Lubricants", href: "/lubricants" },
-        { name: "Hydraulic Fluid", href: "/hydraulic-fluid" },
-        { name: "Chemicals", href: "/chemicals" }, // Added more subcategories
-        { name: "Supplies", href: "/supplies" },
-        { name: "Equipment", href: "/equipment" },
-        { name: "Auto Parts", href: "/auto-parts" },
-        { name: "Purchased Products", href: "/purchased-products" },
+        { name: "Lubricants", href: "/products" },
+        { name: "Hydraulic Fluid", href: "/products" },
+        { name: "Chemicals", href: "/products" },
+        { name: "Supplies", href: "/products" },
+        { name: "Equipment", href: "/products" },
+        { name: "Auto Parts", href: "/products" },
+        { name: "Purchased Products", href: "/products" },
       ],
     },
     {
       name: "Who We Serve",
-      subcategories: [{ name: "Industries", href: "/industries" }],
+      subcategories: [{ name: "Industries", href: "/products" }],
     },
-    { name: "What We Do", href: "/what-we-do" },
-    { name: "Who We Are", href: "/who-we-are" },
+    { name: "What We Do", href: "/products" },
+    { name: "Who We Are", href: "/products" },
   ];
 
   return (

@@ -6,7 +6,6 @@ export async function GET() {
     title: `Product ${index + 1}`,
     sku: `SKU-${index + 1000}`,
     price: (10 + Math.random() * 50).toFixed(2),
-    image: `product.svg`,
     sizesAvailable: Math.random() > 0.5,
     category: ["Lube-Tech", "Chemicals", "Supplies", "Equipment", "Auto Parts"][Math.floor(Math.random() * 5)],
     sizeOptions: [
@@ -27,6 +26,5 @@ export async function GET() {
     ][Math.floor(Math.random() * 6)],
     brand: ["Mobil", "Old World", "Peak"][Math.floor(Math.random() * 3)]
   }));
-	console.log("TCL: products", products)
   return NextResponse.json(products);
 }

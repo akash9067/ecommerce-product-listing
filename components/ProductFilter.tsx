@@ -9,16 +9,14 @@ interface Filter {
 
 interface FilterProps {
   onFilterChange: (filters: string[]) => void;
-  selectedFilters: string[]; // Accept selected filters from query
+  selectedFilters: string[];
 }
 
 const FilterComponent: React.FC<FilterProps> = ({
   onFilterChange,
   selectedFilters,
 }) => {
-  console.log("TCL: selectedFilters", selectedFilters);
   const [activeFilters, setActiveFilters] = useState<string[]>(selectedFilters);
-  console.log("TCL: activeFilters", activeFilters);
   const [expandedCategories, setExpandedCategories] = useState<string[]>([]);
 
   const filters: Filter[] = [
@@ -41,7 +39,7 @@ const FilterComponent: React.FC<FilterProps> = ({
   ];
 
   useEffect(() => {
-    setActiveFilters(selectedFilters); // Update state when selectedFilters prop changes
+    setActiveFilters(selectedFilters);
   }, [selectedFilters]);
 
   const handleFilterClick = (filter: string) => {

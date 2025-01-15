@@ -10,7 +10,6 @@ interface Product {
   title: string;
   id: number;
   price: string;
-  image: string;
 }
 
 interface ProductState {

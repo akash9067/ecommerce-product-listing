@@ -1,12 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import productImage from "../public/images/images.png";
 
 interface ProductProps {
   id: number;
   title: string;
   sku: string;
   price: string;
-  image: string;
   sizesAvailable: boolean;
   category: string;
   sizeOptions: string;
@@ -19,14 +19,13 @@ const ProductCard: React.FC<ProductProps> = ({
   title,
   sku,
   price,
-  image,
   sizesAvailable,
 }) => {
   return (
     <div className="bg-white shadow-md p-4 hover:shadow-lg transition-shadow duration-200">
       <div className="relative">
         <Image
-          src={image}
+          src={productImage}
           alt={title}
           width={200}
           height={200}
