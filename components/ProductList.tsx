@@ -22,7 +22,7 @@ interface Product {
   price: string;
 }
 
-const ProductList = () => {
+const ProductList = ({ ProductType }: { ProductType: string }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const dispatch = useDispatch();
@@ -152,17 +152,29 @@ const ProductList = () => {
 
   return (
     <>
-      <div className="flex justify-between">
-        <h1 className="text-2xl font-bold text-center mb-4">Product Listing</h1>
-        <Sort onSortChange={setSortOption} />
+      <div className="flex justify-between flex-col mb-10">
+        <h2 className="text-2xl font-bold mb-4">{ProductType} Listing</h2>
+        <p>
+          Hydraulic oil is a fluid that has several functions. It serves as an
+          energy transfer or power transmission medium, lubricant, and sealant.
+          Also, it is a fluid that cools the equipment and carries contaminants
+          away. Based on the division of hydraulics into hydrodynamics and
+          hydrostatics, we have different hydraulic fluids. Firstly, hydraulic
+          fluids for hydrodynamic applications are called power-transmission
+          oils. Secondly, hydraulic fluids for hydrostatic application are
+          called hydraulic oils. Read more.
+        </p>
       </div>
       <div>
         <div className="flex space-x-4">
           <div>
-            <FilterComponent
-              onFilterChange={handleFilterChange}
-              selectedFilters={activeFilters}
-            />
+            <Sort onSortChange={setSortOption} />
+            <div>
+              <FilterComponent
+                onFilterChange={handleFilterChange}
+                selectedFilters={activeFilters}
+              />
+            </div>
           </div>
           <div className="w-full grid grid-cols-2 md:grid-cols-3">
             {displayedProducts?.map((product: Product) => (

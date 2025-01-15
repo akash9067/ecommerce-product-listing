@@ -20,27 +20,48 @@ const ProductCard: React.FC<ProductProps> = ({
   sku,
   price,
   sizesAvailable,
+  brand,
 }) => {
   return (
     <div className="bg-white shadow-md p-4 hover:shadow-lg transition-shadow duration-200">
-      <div className="relative">
+      <div className="flex flex-col">
+        <p className="text-gray-500 text-sm font-medium mb-1 inline sm:hidden">
+          {brand}
+        </p>
+        <h3 className="text-base font-semibold text-gray-900 inline sm:hidden">
+          {title}
+        </h3>
+      </div>
+      <div className="relative w-full h-48 mb-4">
         <Image
           src={productImage}
           alt={title}
-          width={200}
-          height={200}
-          className="object-contain mb-4"
+          layout="fill"
+          objectFit="contain"
+          className="rounded"
         />
       </div>
-      <h3 className="text-lg font-semibold">{title}</h3>
-      <p className="text-gray-600">SKU: {sku}</p>
-      {sizesAvailable && (
-        <span className="text-green-500 text-sm">Multiple Sizes Available</span>
-      )}
-      <p className="text-xl font-bold text-blue-500 mt-2">From ${price}</p>
+      <div className="flex flex-col">
+        <p className="text-gray-500 text-sm font-medium mb-1 hidden sm:inline">
+          {brand}
+        </p>
+        <h3 className="text-base font-semibold text-gray-900 hidden sm:inline">
+          {title}
+        </h3>
+      </div>
+      <div className="flex items-center sm:flex-row flex-col">
+        <p className="text-gray-600 text-sm">SKU: {sku}</p>
+        {sizesAvailable && (
+          <div className="text-green-600 text-sm mt-1 inline-block">
+            Multiple Sizes Available
+          </div>
+        )}
+      </div>
+      <p className="text-lg font-bold text-gray-800 mt-2">From ${price}</p>
       <Link href={`/products/${id}`}>
-        <button className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-4 rounded-md mt-4">
-          VIEW PRODUCT
+        <button className="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 rounded-md mt-4 text-center lg:text-sm md:py-3">
+          <span className="hidden sm:inline">VIEW PRODUCT</span>
+          <span className="inline sm:hidden">VIEW</span>
         </button>
       </Link>
     </div>
